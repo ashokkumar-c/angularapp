@@ -10,13 +10,19 @@ import {
   SharedModule
 } from './shared';
 import { CoreModule } from './core/core.module';
+import { ContactListComponent } from './contact-list/contact-list.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { AddtaskComponent } from './components/addtask/addtask.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContactListComponent,
+    TaskListComponent,
+    AddtaskComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,7 @@
+nav 
+{
+ position: unset;
+};
 
 .nav-item{
     padding:2px;
