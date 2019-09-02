@@ -30,10 +30,12 @@ export class TaskService {
       task.priority === undefined ||
       task.startDate === undefined ||
       task.endDate === undefined ||
-      task.is_completed === undefined
+      task.isCompleted === undefined
       ) {
+        console.log('error in validate task');
         return false;
       } else {
+        console.log('sucesses in validate task');
         return true;
       }
   }
@@ -44,8 +46,16 @@ export class TaskService {
     return this.httpClient.get(this.apiURL + '/tasks');
   }
 
+  gettask(id: string){
+    return this.httpClient.get(this.apiURL + '/tasks/' + id)
+  }
+
   addTask(task: Task): Observable<Task> {
-    return this.httpClient.post<Task>(this.apiURL + '/tasks', task, this.httpOptions);
+    return this.httpClient.post<any>(this.apiURL + '/tasks', task, this.httpOptions);
+  }
+
+  updateTask(task: any): Observable<any> {    
+    return this.httpClient.patch<any>(this.apiURL + '/tasks/'+ task['_id'] , task, this.httpOptions);
   }
 
 }

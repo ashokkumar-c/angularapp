@@ -13,6 +13,10 @@ import { CoreModule } from './core/core.module';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { AddtaskComponent } from './components/addtask/addtask.component';
+import { EdittaskComponent } from './components/edittask/edittask.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,16 @@ import { AddtaskComponent } from './components/addtask/addtask.component';
     HeaderComponent,
     ContactListComponent,
     TaskListComponent,
-    AddtaskComponent
+    AddtaskComponent,
+    EdittaskComponent
   ],
   imports: [
     BrowserModule,
     CoreModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]

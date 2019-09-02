@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../../core/models/task.model';
 import { TaskService } from '../../core/services/task.service';
 import { Router } from '@angular/router';
-import { Task } from '../../core/models/task.model';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -11,40 +12,47 @@ import { Task } from '../../core/models/task.model';
 })
 export class AddtaskComponent implements OnInit {
 
-  newtask: Task;
-  task: string;
-  parentTaskId: string;
-  priority: number;
-  startDate: Date;
-  endDate: Date;
+  //task: string;
+  //parentTaskId: string;
+  //priority: number;
+  //startDate: Date;
+  //endDate: Date;
+  newtask: Task = {
+    task:'',
+    parentTaskId:'',
+    endDate:null,
+    startDate:null,
+    isCompleted:false,
+    priority:0
+  };
 
-  constructor() { }
+  constructor(private taskService: TaskService,
+              private router: Router,
+              private toastrService: ToastrService) { }
 
   ngOnInit() {
   }
 
-  resetvalues()  {
-   /*this.newtask.task = '';
-   this.newtask.parentTaskId = '';
-   this.newtask.startDate = null;
-   this.newtask.endDate = null;
-   this.newtask.priority = 0;*/
-   this.task = '';
-   this.parentTaskId = '';
-   this.startDate = null;
-   this.endDate = null;
-   this.priority = 0;
-
+  resetvalues() {
+    this.newtask.task = '';
+    this.newtask.parentTaskId = '';
+    this.newtask.startDate = null;
+    this.newtask.endDate = null;
+    this.newtask.priority = 0;
   }
 
   tasksubmit() {
-    this.newtask.task = this.task;
-    this.newtask.parentTaskId = this.parentTaskId;
-    this.newtask.startDate = this.startDate;
-    this.newtask.endDate = this.endDate;
-    this.newtask.priority = this.priority;
-    this.newtask.is_completed = false;
-
+    
+    this.taskService.addTask(this.newtask).subscribe(result =>{
+      console.log(result);
+      if(result['status'] === 'success')
+      {
+        this.toastrService.success('Success', 'Task created successfully');
+        this.router.navigate(['/home']);
+      }
+    });
+  
+    
   }
 
 }
